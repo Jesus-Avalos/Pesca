@@ -15,7 +15,7 @@ class CreateGolonsTable extends Migration
     {
         Schema::create('golon', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('peso_golon',8,2);
+            $table->double('total',8,2);
             $table->foreignId('persona_id');
             $table->foreignId('torneo_id');
             $table->timestamps();

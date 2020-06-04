@@ -2490,6 +2490,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['torneos'],
@@ -39754,15 +39761,64 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(torneo.tipo))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(torneo.status))]),
+                    _c("td", [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "badge",
+                          class: {
+                            "badge-success": torneo.status == "Activo",
+                            "badge-warning": torneo.status == "En progreso",
+                            "badge-danger": torneo.status == "Terminado"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(torneo.status) +
+                              "\n                        "
+                          )
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("td", [
-                      torneo.status != "Terminado"
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-sm btn-secondary",
+                          attrs: {
+                            title: "Resultados",
+                            href: "/torneo/result/" + torneo.id,
+                            target: "_blank"
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-bars" })]
+                      ),
+                      _vm._v(" "),
+                      torneo.status == "Activo"
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-sm btn-primary",
+                              attrs: {
+                                title: "Ir al registro",
+                                href: "/torneo/" + torneo.id
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-edit" })]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      torneo.status == "En progreso"
                         ? _c(
                             "a",
                             {
                               staticClass: "btn btn-sm btn-success",
-                              attrs: { href: "/torneo/" + torneo.id }
+                              attrs: {
+                                title: "Continuar",
+                                href: "/torneo/start/" + torneo.id
+                              }
                             },
                             [
                               _c("i", {
@@ -39772,11 +39828,20 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      torneo.status != "En progreso"
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-danger",
+                              attrs: { title: "Eliminar" }
+                            },
+                            [_c("i", { staticClass: "fas fa-trash" })]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 })
-              : [_vm._m(3)]
+              : [_vm._m(2)]
           ],
           2
         )
@@ -39815,14 +39880,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_c("i", { staticClass: "fas fa-wrench" })])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-sm btn-danger" }, [
-      _c("i", { staticClass: "fas fa-trash" })
     ])
   },
   function() {
@@ -40446,9 +40503,10 @@ var render = function() {
                                     directives: [
                                       {
                                         name: "model",
-                                        rawName: "v-model",
+                                        rawName: "v-model.number",
                                         value: _vm.golon,
-                                        expression: "golon"
+                                        expression: "golon",
+                                        modifiers: { number: true }
                                       }
                                     ],
                                     staticClass:
@@ -40460,7 +40518,10 @@ var render = function() {
                                         if ($event.target.composing) {
                                           return
                                         }
-                                        _vm.golon = $event.target.value
+                                        _vm.golon = _vm._n($event.target.value)
+                                      },
+                                      blur: function($event) {
+                                        return _vm.$forceUpdate()
                                       }
                                     }
                                   })

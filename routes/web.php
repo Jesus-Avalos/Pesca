@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home','HomeController@index');
-Route::get('/torneo/{torneo}','TorneoController@show');
-Route::get('/torneo/start/{torneo}','TorneoController@start');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home','HomeController@index');
+    Route::get('/torneo/result/{torneo}','TorneoController@results');
+    Route::get('/torneo/{torneo}','TorneoController@show');
+    Route::get('/torneo/start/{torneo}','TorneoController@start');
+});

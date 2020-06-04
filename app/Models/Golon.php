@@ -10,5 +10,5 @@ class Golon extends Pivot
     
     public $incrementing = true;
 
-    protected $fillable = ['peso_golon','persona_id','torneo_id'];
+    protected $fillable = ['total','persona_id','torneo_id'];
 }

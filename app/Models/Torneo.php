@@ -24,6 +24,6 @@ class Torneo extends Model
 
     public function golones()
     {
-        return $this->belongsToMany('App\Models\Persona','golon')->using('App\Models\Golon')->withTimestamps()->withPivot('id','peso_golon');
+        return $this->belongsToMany('App\Models\Persona','golon')->using('App\Models\Golon')->withTimestamps()->withPivot('id','total');
     }
 }

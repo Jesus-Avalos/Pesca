@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $torneos = Torneo::all();
+        $torneos = Torneo::orderBy('id','DESC')->get();
         return view('home', compact('torneos'));
     }
 }

@@ -18,12 +18,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('torneo','TorneoController@store');
-Route::post('orilla','OrillaController@store');
-Route::post('orilla/delete','OrillaController@destroy');
-Route::put('orilla/{orilla}','OrillaController@update');
-Route::post('equipo','EmbarcacionController@store');
-Route::put('equipo/{equipo}','EmbarcacionController@update');
-Route::post('equipo/delete','EmbarcacionController@destroy');
+Route::group(['middleware' => ['auth']], function () {
+    Route::post('torneo','TorneoController@store');
+    Route::get('torneo/getResults/{torneo}','TorneoController@getResults');
+    Route::post('orilla','OrillaController@store');
+    Route::post('orilla/delete','OrillaController@destroy');
+    Route::put('orilla/{orilla}','OrillaController@update');
+    Route::post('equipo','EmbarcacionController@store');
+    Route::put('equipo/{equipo}','EmbarcacionController@update');
+    Route::post('equipo/delete','EmbarcacionController@destroy');
+    Route::post('golon','GolonController@store');
+});
 
-Route::post('golon','GolonController@store');

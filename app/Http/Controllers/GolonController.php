@@ -11,10 +11,10 @@ class GolonController extends Controller
     {
         $exist = Torneo::find($request->torneo_id)->golones()->where('persona_id',$request->persona_id)->get();
         if (count($exist)) {
-            Torneo::find($request->torneo_id)->golones()->updateExistingPivot($request->persona_id,['peso_golon'=>$request->golon]);
+            Torneo::find($request->torneo_id)->golones()->updateExistingPivot($request->persona_id,['total'=>$request->golon]);
             return 'Actualizado correctamente';
         }else {
-            Torneo::find($request->torneo_id)->golones()->attach($request->persona_id,['peso_golon'=>$request->golon]);
+            Torneo::find($request->torneo_id)->golones()->attach($request->persona_id,['total'=>$request->golon]);
             return 'Registrado correctamente';
         }
     }

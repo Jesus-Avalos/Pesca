@@ -19,10 +19,17 @@
                     <tr v-for="torneo in listTorneos" :key="torneo.id">
                         <td>{{ torneo.name }}</td>
                         <td>{{ torneo.tipo }}</td>
-                        <td>{{ torneo.status }}</td>
                         <td>
-                            <a :href='"/torneo/"+torneo.id' class="btn btn-sm btn-success" v-if="torneo.status != 'Terminado'"><i class="fas fa-arrow-circle-right"></i></a>
-                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                            <span class="badge" 
+                                :class="{'badge-success': torneo.status == 'Activo', 'badge-warning': torneo.status == 'En progreso','badge-danger': torneo.status == 'Terminado'}">
+                                    {{ torneo.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <a title="Resultados" :href='"/torneo/result/"+torneo.id' class="btn btn-sm btn-secondary" target="_blank"><i class="fas fa-bars"></i></a>
+                            <a title="Ir al registro" :href='"/torneo/"+torneo.id' class="btn btn-sm btn-primary" v-if="torneo.status == 'Activo'"><i class="fas fa-edit"></i></a>
+                            <a title="Continuar" :href='"/torneo/start/"+torneo.id' class="btn btn-sm btn-success" v-if="torneo.status == 'En progreso'"><i class="fas fa-arrow-circle-right"></i></a>
+                            <button title="Eliminar" class="btn btn-sm btn-danger" v-if="torneo.status != 'En progreso'"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 </template>
