@@ -47,8 +47,8 @@ class EmbarcacionController extends Controller
 		    		$persona = Persona::create([
 						'name' => $names[$i],
 						'ciudad' => $cities[$i],
-						'telefono' => ($phones[$i])?? '',
-						'email' => ($emails[$i])?? ''
+						'telefono' => ($phones[$i])?? null,
+						'email' => ($emails[$i])?? null
 					]);
 					
 					$tipo = ($i == 0) ? 'Capitan' : 'Partner';

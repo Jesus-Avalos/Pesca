@@ -24,4 +24,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/torneo/result/{torneo}','TorneoController@results');
     Route::get('/torneo/{torneo}','TorneoController@show');
     Route::get('/torneo/start/{torneo}','TorneoController@start');
+    Route::view('/personas', 'datos.personas', ['personas' => \App\Models\Persona::all()]);
+    Route::view('/equipos', 'datos.equipos', ['equipos' => \App\Models\Equipo::all()]);
 });
